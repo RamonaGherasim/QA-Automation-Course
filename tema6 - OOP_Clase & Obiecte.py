@@ -81,7 +81,7 @@ class Rectangle:
         return area
 
     def perimeter(self):
-        perimeter = 2 * self.length + 2 * self.width
+        perimeter = 2 * (self.length + self.width)
         return perimeter
 
     def change_color(self, new_color):
@@ -127,9 +127,9 @@ class Employee:
     # methods
     def describe(self):
         print(f'''
-My surname is {self.surname}.
-My first name is {self.firstname}.
-I have a salary of {self.salary}.''')
+Employee surname is {self.surname}.
+Employee first name is {self.firstname}.
+Employee has a salary of {self.salary}.''')
 
     def full_name(self):
         full_name = self.surname + ' ' + self.firstname
@@ -144,8 +144,8 @@ I have a salary of {self.salary}.''')
         return annual_salary
 
     def salary_increase(self, percentage):
-        salary_increase = (percentage / 100) * self.salary
-        return salary_increase
+        self.salary = self.salary + (percentage / 100 * self.salary)
+        return self.salary
 
 
 # First object - instance of class Employee()
@@ -184,8 +184,11 @@ class Account:
         print(f'Account holder {self.account_holder} has an amount of {self.balance} lei in their {self.iban} account.')
 
     def account_debit(self, amount):
-        self.balance -= amount
-        return self.balance
+        if amount <= self.balance:
+            self.balance -= amount
+            return self.balance
+        else:
+            return "Insufficient balance!"
 
     def account_credit(self, amount):
         self.balance += amount
@@ -325,7 +328,7 @@ Masina este inmatriculata?  {self.inmatriculata}
 
     def accelereaza(self, viteza_accelerare):
         if viteza_accelerare < 0:
-            self.viteza_actuala = "Eroare, viteza nu poate fi negativa!"
+            print("Eroare, viteza nu poate fi negativa!")
         elif viteza_accelerare > self.viteza_max:
             self.viteza_actuala = self.viteza_max
             return self.viteza_actuala
@@ -401,3 +404,35 @@ print(TodoList.todo)
 todo1.afiseaza_detalii_suplimentare("citeste o carte")
 todo1.afiseaza_todo_list()
 print(TodoList.todo)
+
+
+from tabulate import tabulate
+class Factura:
+    seria = 123456
+
+    def __init__(self, numar, nume_produs, cantitate, pret_buc):
+        self.numar = numar
+        self.nume_produs = nume_produs
+        self.cantitate = cantitate
+        self.pret_buc = pret_buc
+
+    def schimba_cantitatea(self, cantitate):
+        self.cantitate = cantitate
+
+    def schimba_pretul(self, pret):
+        self.pret_buc = pret
+
+    def schimba_nume_produs(self, nume):
+        self.nume_produs = nume
+
+    def calc_total(self):
+        return self.pret_buc * self.cantitate
+
+    def genereaza_factura(self):
+        print(tabulate([[self.nume_produs, self.cantitate, self.pret_buc, self.calc_total(), date.today()]],
+                       headers=['Produs', 'Cantitate', 'Pret Buc', 'Total', 'Data']))
+
+
+factura_mea = Factura(5, "Dero", 3, 14)
+factura_mea.genereaza_factura()
+
