@@ -8,7 +8,7 @@ from abc import ABC, abstractmethod
 # Define abstract class GeometricShape
 class GeometricShape(ABC):
     # fields
-    PI = 3.24
+    PI = 3.14
 
     # methods
     @abstractmethod
@@ -18,6 +18,12 @@ class GeometricShape(ABC):
     def describe(self):
         print("Most likely, I have corners.")
 
+    """ OR
+    @classmethod
+    def decribe(cls):
+        print("Most likely, I have corners.")
+    """
+
 
 # INHERITANCE
 class Square(GeometricShape, ABC):
@@ -26,8 +32,13 @@ class Square(GeometricShape, ABC):
         self.__side = side
 
 # ENCAPSULATION
-    # Getter method => @property
+
     @property
+    def side(self):
+        return self.__side
+
+    # Getter method
+    @side.getter
     def side(self):
         print(f'Getting side: {self.__side}')
         return self.__side
@@ -54,8 +65,12 @@ class Circle(GeometricShape, ABC):
     def __init__(self, radius):
         self.__radius = radius
 
-    # Getter method => @property
     @property
+    def radius(self):
+        return self.__radius
+
+    # Getter method
+    @radius.getter
     def radius(self):
         print(f'Getting radius: {self.__radius}')
         return self.__radius
@@ -69,7 +84,7 @@ class Circle(GeometricShape, ABC):
     # Deleter method
     @radius.deleter
     def radius(self):
-        self.__radius = None
+        self.__radius = 0
         print('Radius deleted')
 
     def area(self):
@@ -100,5 +115,3 @@ circle.radius
 circle.area()
 del circle.radius
 circle.radius
-
-
