@@ -12,7 +12,6 @@ from selenium.webdriver.common.by import By
 
 chrome_page = webdriver.Chrome()  # .Chrome este clasa din pachetul Selenium
 chrome_page.get("https://the-internet.herokuapp.com/login")  # accesarea paginii html dorite
-# time.sleep(5)  # parametrul este in secunde
 
 chrome_page.find_element(By.ID, "username").send_keys("Ramona")  # tipareste "Ramona" in field-ul "Username" din browser
 
@@ -24,6 +23,9 @@ time.sleep(5)
 
 chrome_page.find_element(By.LINK_TEXT, "Elemental Selenium").click()  # link text => stringul care este intre <a>_!</a>
 time.sleep(3)
+
+chrome_page.find_element(By.PARTIAL_LINK_TEXT, "Elemental").click()
+time.sleep(4)
 
 
 chrome_page.quit()  # metoda aceasta inchide toata instanta browser-ului => de preferat
