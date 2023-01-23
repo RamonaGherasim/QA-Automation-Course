@@ -1,4 +1,3 @@
-import unittest
 from Alerts import Alerts
 from tema9_Verificatori import Login
 from Keys import Key
@@ -10,6 +9,7 @@ from Firefox_auth import Firefox
 
 # instalare package pt a genera un raport
 import HtmlTestRunner
+import unittest
 
 
 class TestSuite(unittest.TestCase):
